@@ -19,7 +19,7 @@ const Input =(props)=>{
 }
 
 Input.defaultProps ={
-    onChange :()=>{}
+    onChange : ()=>{}
 }
 
 export default Input

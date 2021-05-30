@@ -21,9 +21,7 @@ export const loginHandler =(credentials) => {
 //NOTE : Here thunk plays the role: by just wrapper loginHandler by providing acces for dispatch method as arugment
 export const loginHandler =(credentials) => (dispatch) =>{
     return apiCalls.login(credentials).then(response=>{
-        debugger
         dispatch(loginSuccess({...response.data,password:credentials.password}))
-        debugger
         return response
     })
 }
