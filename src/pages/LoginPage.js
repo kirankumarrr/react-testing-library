@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import Input from '../components/Input/Input'
-import { connect } from "react-redux";
 import * as authActions from '../redux/authActions'
-
+import { useDispatch, useSelector } from "react-redux";
 const LoginPage=(props)=>{
-
+    const dispatch = useDispatch();
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [ispendingApiCall, setIspendingApiCall] = useState(false)
@@ -20,8 +19,8 @@ const LoginPage=(props)=>{
             username,
             password
           }; 
-        const { actions } = props
-        actions.postLogin(body).then(()=>{
+        dispatch(authActions.loginHandler(body))
+        .then(()=>{
             setIspendingApiCall(false)
             props.history.push('/')  
         })
@@ -56,26 +55,4 @@ const LoginPage=(props)=>{
 }
 
 
-// LoginPage.defaultProps ={
-//     actions:{
-//         postLogin:()=> new Promise((resolve, reject)=>{
-//             resolve({})
-//         }),
-//     }, 
-//     history : {
-//         push:()=>{}
-//     },
-//     dispatch : ()=>{}
-// }
-
-
-
-const mapDispatchToProps = dispatch =>{
-    return {
-        actions : {
-            postLogin : (body)=> dispatch(authActions.loginHandler(body))
-        }
-    }
-}
-
-export default connect(null,mapDispatchToProps)(LoginPage)
+export default LoginPage
